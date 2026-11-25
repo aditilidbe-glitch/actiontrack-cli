@@ -114,13 +114,13 @@
 
 ## Risks & Dependencies
 
-- Real Gmail drafting is unverified. Mitigation: `--dry-run` works without Gmail; the tool prefix is configurable (`ACTIONTRACK_GMAIL_PREFIX`); verify once against a real draft before relying on it.
+- Gmail drafting depends on the connector's tool name in a headless session. Verified on 2026-11-25: prefix `mcp__claude_ai_Gmail__` creates a real draft. Mitigation: `--dry-run` works without Gmail; the prefix is configurable (`ACTIONTRACK_GMAIL_PREFIX`); a wrong prefix fails cleanly and prints the draft text.
 - Similarity merging can still merge two genuinely different tasks. Mitigation: owner compatibility is required, every merge is reported with both texts and a score, near-misses are listed.
 - Relative-date rules are conventions ("next Tuesday" means next calendar week). Mitigation: documented in `docs/spec/dates.md`; ambiguous phrases are never resolved.
 - The roster holds real emails. Mitigation: `people.json` is git-ignored; only fake data is committed.
 
 ## Open Questions
 
-- [ ] What is the tool-name prefix of the Gmail connector in the user's Claude setup (default `mcp__gmail__` is a placeholder)?
+- [x] Gmail connector tool-name prefix: `mcp__claude_ai_Gmail__` (verified 2026-11-25).
 - [ ] Should a re-ingest recompute owners when the roster changes? Currently existing sources are left untouched.
 - [ ] Should `followup` also support updating an existing draft instead of creating a new one when items change?

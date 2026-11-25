@@ -65,11 +65,11 @@ Exit codes: 0 success, 1 operational failure (no ingestable notes, Gmail failure
 
 `followup` creates a Gmail **draft** through the Gmail MCP connector by running a headless `claude -p` call allowed to use only the four draft tools. It never sends: delivery tools are never used, and a test asserts it.
 
-- `ACTIONTRACK_GMAIL_PREFIX`: the connector's tool-name prefix in your Claude setup (default `mcp__gmail__`, a placeholder you must check).
+- `ACTIONTRACK_GMAIL_PREFIX`: the connector's tool-name prefix in your Claude setup (default `mcp__claude_ai_Gmail__`, the name seen in a headless `claude -p` session).
 - `ACTIONTRACK_CLAUDE`: path to the `claude` binary if it is not on PATH.
 - `--dry-run` prints the draft without calling Gmail.
 
-**Status:** the real connector path has not been exercised against a live mailbox; the test suite uses a recording fake. Try it once with a harmless owner and check the draft in Gmail.
+**Status:** verified once end to end on 2026-11-25. `followup` created a real Gmail draft (label `DRAFT` only, not sent) through `claude -p`, and reading it back matched the CLI output. The test suite still uses a recording fake. If `claude` is not on PATH, set `ACTIONTRACK_CLAUDE` to its full path.
 
 ## Tests
 
