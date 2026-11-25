@@ -1,0 +1,7 @@
+.actiontrack/
+.remember/
+people.json
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
